@@ -33,6 +33,6 @@ cacheSolve <- function(p, ...) {
         }
         data <- p$getmat()
         m <- solve(data)
-        x$setinv(m)
+        p$setinv(m)
         m
 }
