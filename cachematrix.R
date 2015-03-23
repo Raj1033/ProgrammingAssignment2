@@ -18,21 +18,21 @@ makeCacheMatrix <- function(x = matrix()) {
 	getinv<-function(){
 		inv
 		}
-	matrix(c(setmat=setmat,getmat=getmat,setinv=setinv,getinv=getinv),2,2)
+	list(setmat=setmat,getmat=getmat,setinv=setinv,getinv=getinv)
 }
 
 
 ## Function to calculate the inverse of a matrix and
 ## if already calculated, retrieve it from cache
 
-cacheSolve <- function(p, ...) {
-        m <- p$getinv()
+cacheSolve <- function(x, ...) {
+        m <- x$getinv()
         if(!is.null(m)) {
                 message("getting cached data")
                 return(m)
         }
-        data <- p$getmat()
-        m <- solve(data)
-        p$setinv(m)
+        data <- x$getmat()
+        m <- solve(data, ...)
+        x$setinv(m)
         m
 }
